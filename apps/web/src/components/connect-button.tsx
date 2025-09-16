@@ -36,8 +36,7 @@ export function WalletConnectButton() {
       type='button'
       onClick={() => connect({ connector: connectors[0] })}
     >
-      <div>You&apos;re not connected</div>
-      <div>Address: {address}</div>
+      Connect wallet
     </Button>
   )
 

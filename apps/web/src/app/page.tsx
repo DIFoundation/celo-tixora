@@ -176,7 +176,6 @@ import { useState, useEffect } from "react"
 import { useAccount } from "wagmi"
 import Image from "next/image"
 import Link from "next/link"
-import { WalletDebug } from "@/components/wallet-debug"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ChevronDown, Globe, RefreshCw, Shield, Star, Ticket, Zap } from "lucide-react"
 import { Card } from "@/components/ui/card"
@@ -208,13 +207,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden mb-6">
-      {/* Debug overlay */}
-      {showDebug && (
-        <div className="fixed bottom-4 right-4 z-50 max-w-xs">
-          <WalletDebug />
-        </div>
-      )}
-
       {/* Hero Section */}
       <section className="py-20 px-4 relative overflow-hidden min-h-screen flex items-center">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 animate-gradient" />
