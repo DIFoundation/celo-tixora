@@ -171,23 +171,26 @@
 
 "use client"
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Calendar, MapPin, Users, Ticket, Star, Shield, Zap, Globe, RefreshCw, ChevronDown, Play, Pause } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
 import { useAccount } from "wagmi"
 import Image from "next/image"
 import Link from "next/link"
+import { WalletDebug } from "@/components/wallet-debug"
+import { Button } from "@/components/ui/button"
+import { ArrowRight, ChevronDown, Globe, RefreshCw, Shield, Star, Ticket, Zap } from "lucide-react"
+import { Card } from "@/components/ui/card"
 
 export default function Home() {
   const { isConnected } = useAccount()
   const router = useRouter()
   const [isVisible, setIsVisible] = useState(false)
+  const [showDebug, setShowDebug] = useState(false)
 
   useEffect(() => {
     setIsVisible(true)
+    // Only show debug in development
+    setShowDebug(process.env.NODE_ENV === 'development')
   }, [])
 
   useEffect(() => {
@@ -205,6 +208,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden mb-6">
+      {/* Debug overlay */}
+      {showDebug && (
+        <div className="fixed bottom-4 right-4 z-50 max-w-xs">
+          <WalletDebug />
+        </div>
+      )}
+
       {/* Hero Section */}
       <section className="py-20 px-4 relative overflow-hidden min-h-screen flex items-center">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 animate-gradient" />
@@ -547,7 +557,7 @@ export default function Home() {
           
           <div className="text-center pt-8 border-t border-border">
             <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} Tixora. All rights reserved.
+              {new Date().getFullYear()} Tixora. All rights reserved.
             </p>
           </div>
         </div>

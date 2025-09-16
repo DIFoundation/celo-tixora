@@ -12,7 +12,7 @@
   "dependencies": {
     "@farcaster/frame-core": "latest",
     "@farcaster/frame-sdk": "^0.0.61",
-    "@farcaster/miniapp-wagmi-connector": "latest",
+    "@farcaster/miniapp-wagmi-connector": "^1.0.0",
     "@farcaster/quick-auth": "latest",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-slot": "^1.2.3",
