@@ -11,14 +11,23 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { useAccount } from "wagmi"
+import { WalletConnectButton } from "./connect-button"
+import { ConnectButton } from "@rainbow-me/rainbowkit"
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "Docs", href: "https://docs.celo.org", external: true },
+  { name: 'Dashboard', href: '/dashboard' },
+  { name: 'Marketplace', href: '/marketplace' },
+  { name: 'My Tickets', href: '/tickets' },
+  { name: 'Create Event', href: '/create-event' },
+  { name: "Docs", href: "https://docs.celo.org", external: true }
 ]
 
 export function Navbar() {
   const pathname = usePathname()
+  const { isConnected } = useAccount()
+
   
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
@@ -34,10 +43,18 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent side="left" className="w-80">
               <div className="flex items-center gap-2 mb-8">
-
-                <span className="font-bold text-lg">
-                  celo-tixora
-                </span>
+              <Link href="/" className="flex items-center space-x-2">
+                  <Image 
+                    src="/logo.svg" 
+                    alt="Tixora" 
+                    width={40} 
+                    height={40} 
+                    className="rounded-full"
+                  />
+                  <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                    Tixora
+                  </span>
+                </Link>
               </div>
               <nav className="flex flex-col gap-4">
                 {navLinks.map((link) => (
@@ -55,7 +72,7 @@ export function Navbar() {
                   </Link>
                 ))}
                 <div className="mt-6 pt-6 border-t">
-                  <Button className="w-full">Connect Wallet</Button>
+                  <WalletConnectButton />
                 </div>
               </nav>
             </SheetContent>
@@ -63,9 +80,8 @@ export function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-
-            <span className="hidden font-bold text-xl sm:inline-block">
-              celo-tixora
+            <span className="hidden font-bold sm:inline-block text-2xl bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              Tixora
             </span>
           </Link>
         </div>
@@ -90,7 +106,9 @@ export function Navbar() {
           ))}
           
           <div className="flex items-center gap-3">
-            <Button variant="outline" size="sm">Connect Wallet</Button>
+            <Button variant="outline" size="sm">
+              <WalletConnectButton />
+            </Button>
           </div>
         </nav>
       </div>

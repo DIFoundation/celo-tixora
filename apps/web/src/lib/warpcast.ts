@@ -52,7 +52,7 @@ export async function getFarcasterManifest() {
       splashBackgroundColor: "#FFFFFF",
       webhookUrl: `${appUrl}/api/webhook`,
       // Metadata https://github.com/farcasterxyz/miniapps/discussions/191
-      subtitle: "An event ticketing platform build on Celo", // 30 characters, no emojis or special characters, short description under app name
+      subtitle: "Ticket Management on Celo", // 30 characters, no emojis or special characters, short description under app name
       description: "An event ticketing platform build on Celo", // 170 characters, no emojis or special characters, promotional message displayed on Mini App Page
       primaryCategory: "social",
       tags: ["mini-app", "celo"], // up to 5 tags, filtering/search tags

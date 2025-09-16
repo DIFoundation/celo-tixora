@@ -9,7 +9,7 @@ export function WalletConnectButton() {
   const { address, isConnected } = useAccount()
   const { connect, connectors } = useConnect()
   const { disconnect } = useDisconnect()
-  const { context } = useMiniApp()
+  const { context, isMiniAppReady } = useMiniApp()
 
   useEffect(() => {
     setMounted(true)
@@ -24,13 +24,14 @@ export function WalletConnectButton() {
   }
 
   if (!isConnected) {
-    const frameConnector = connectors.find(connector => connector.id === 'frameWallet')
-    
+    // const frameConnector = connectors.find(connector => connector.chainId === 42220)
+    const frameConnector = connectors.find(connector => connector.name === "Frame")
+
     return (
       <button
         onClick={() => frameConnector && connect({ connector: frameConnector })}
         type="button"
-        className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+        className=" w-full inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
       >
         Connect Wallet
       </button>
@@ -38,10 +39,10 @@ export function WalletConnectButton() {
   }
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 w-full">
       <button
         type="button"
-        className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-3 py-2"
+        className="w-full inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-3 py-2"
       >
         Celo
       </button>
@@ -49,7 +50,7 @@ export function WalletConnectButton() {
       <button
         onClick={() => disconnect()}
         type="button"
-        className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+        className="w-full inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
       >
         {address ? `${address.slice(0, 6)}...${address.slice(-4)}` : 'Connected'}
       </button>
