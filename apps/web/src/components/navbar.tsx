@@ -42,16 +42,16 @@ export function Navbar() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-80">
-              <div className="flex items-center gap-2 mb-8">
+              <div className="flex items-center gap-2 mb-4">
               <Link href="/" className="flex items-center space-x-2">
                   <Image 
                     src="/logo.svg" 
                     alt="Tixora" 
                     width={40} 
                     height={40} 
-                    className="rounded-full"
+                    className="rounded-full h-10 w-10"
                   />
-                  <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                  <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                     Tixora
                   </span>
                 </Link>
@@ -63,7 +63,7 @@ export function Navbar() {
                     href={link.href}
                     target={link.external ? "_blank" : undefined}
                     rel={link.external ? "noopener noreferrer" : undefined}
-                    className={`flex items-center gap-2 text-base font-medium transition-colors hover:text-primary ${
+                    className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${
                       pathname === link.href ? "text-foreground" : "text-foreground/70"
                     }`}
                   >
@@ -80,7 +80,7 @@ export function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <span className="hidden font-bold sm:inline-block text-2xl bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="hidden font-bold sm:inline-block text-xl bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
               Tixora
             </span>
           </Link>
