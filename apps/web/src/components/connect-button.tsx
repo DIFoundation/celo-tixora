@@ -2,18 +2,16 @@
 
 import { useState, useEffect } from 'react'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
-import { useMiniApp } from '@/contexts/miniapp-context'
+// import { useMiniApp } from '@/contexts/miniapp-context'
 // import { ConnectButton } from './connect-button'
-import { ConnectButton } from "@rainbow-me/rainbowkit"
+// import { ConnectButton } from "@rainbow-me/rainbowkit"
+import { Button } from './ui/button'
 
 export function WalletConnectButton() {
   const { address, isConnected } = useAccount()
-  const { context, isMiniAppReady } = useMiniApp()
+  const { connect, connectors } = useConnect()
 
-  if (!isConnected) {
-    return <ConnectButton />
-  }
-
+  if (isConnected) {
   return (
     <div className="flex items-center gap-2 w-full">
       <button
@@ -31,4 +29,16 @@ export function WalletConnectButton() {
       </button>
     </div>
   )
+}
+
+  return(
+    <Button
+      type='button'
+      onClick={() => connect({ connector: connectors[0] })}
+    >
+      <div>You&apos;re not connected</div>
+      <div>Address: {address}</div>
+    </Button>
+  )
+
 }
