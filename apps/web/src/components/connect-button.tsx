@@ -1,10 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
-// import { useMiniApp } from '@/contexts/miniapp-context'
-// import { ConnectButton } from './connect-button'
-// import { ConnectButton } from "@rainbow-me/rainbowkit"
+import { useAccount, useConnect } from 'wagmi'
 import { Button } from './ui/button'
 
 export function WalletConnectButton() {

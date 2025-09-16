@@ -6,7 +6,7 @@ import { ReactNode } from "react";
 import { WagmiProvider, createConfig, http } from "wagmi";
 import { celo, celoAlfajores } from "wagmi/chains";
 
-const config = createConfig({
+export const config = createConfig({
   chains: [celo, celoAlfajores],
   connectors: [miniAppConnector()],
   transports: {

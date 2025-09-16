@@ -4,6 +4,8 @@ import './globals.css';
 
 import { Navbar } from '@/components/navbar';
 import Providers from "@/components/providers"
+import { WagmiProvider } from 'wagmi';
+import { config } from '@/contexts/frame-wallet-context';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -48,12 +50,14 @@ export default function RootLayout({
       <body className={inter.className}>
         {/* Navbar is included on all pages */}
         <div className="relative flex min-h-screen flex-col">
+          <WagmiProvider config={config}>
           <Providers>
             <Navbar />
             <main className="flex-1">
               {children}
             </main>
           </Providers>
+          </WagmiProvider>
         </div>
       </body>
     </html>
