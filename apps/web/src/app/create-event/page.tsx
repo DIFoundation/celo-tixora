@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "react-toastify"
-import { Upload, Calendar, MapPin, Users, DollarSign, Sparkles, ArrowLeft, Clock, Image, FileText, Coins } from "lucide-react"
+import { Upload, Calendar, MapPin, Users, DollarSign, Sparkles, ArrowLeft, Clock, Image, FileText, Coins, ImageIcon } from "lucide-react"
 import { eventTicketingAddress, eventTicketingAbi } from "@/lib/addressAndAbi"
 import Link from "next/link"
 
@@ -134,23 +134,23 @@ export default function CreateEvent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900/10 to-slate-900">
-      <div className="pb-16 px-4 pt-8">
+      <div className="pb-6 pt-4">
         <div className="container mx-auto max-w-6xl">
           {/* Header with back button */}
-          <div className="mb-12">
-            <Link href="/dashboard" className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors mb-6">
-              <ArrowLeft className="h-4 w-4" />
+          <div className="mb-4">
+            <Link href="/dashboard" className="text-sm inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors mb-4">
+              <ArrowLeft className="h-3 w-3" />
               Back to Dashboard
             </Link>
-            <div className="flex items-center gap-4 mb-2">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
-                <Sparkles className="h-6 w-6 text-white" />
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                <Sparkles className="h-4 w-4 text-white" />
               </div>
               <div>
-                <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
                   Create Your Event
                 </h1>
-                <p className="text-slate-300 text-lg mt-2">Launch your next amazing event on the blockchain</p>
+                <p className="text-slate-300 text-base ">Launch your next amazing event on the blockchain</p>
               </div>
             </div>
           </div>
@@ -162,8 +162,8 @@ export default function CreateEvent() {
                 {/* Basic Information */}
                 <Card className="bg-gradient-to-br from-slate-800/90 to-purple-900/20 border-purple-500/30 shadow-2xl">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-3 text-white text-2xl">
-                      <FileText className="h-6 w-6 text-purple-400" />
+                    <CardTitle className="flex items-center gap-2 text-white text-xl">
+                      <FileText className="h-4 w-4 text-purple-400" />
                       Basic Information
                     </CardTitle>
                   </CardHeader>
@@ -179,7 +179,7 @@ export default function CreateEvent() {
                         onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                         placeholder="Web3 Innovation Summit 2024"
                         required
-                        className="bg-slate-800/80 border-purple-500/30 text-white focus:border-purple-400 focus:ring-purple-400/20 h-12 text-lg"
+                        className="text-sm px-4 rounded-md h-10 bg-slate-800/80 border-purple-500/30 text-white focus:border-purple-400 focus:ring-purple-400/20"
                       />
                     </div>
 
@@ -195,7 +195,7 @@ export default function CreateEvent() {
                         placeholder="Join us for an incredible journey into the future of Web3 technology. Connect with industry leaders, discover innovative projects, and shape the decentralized future..."
                         rows={6}
                         required
-                        className="bg-slate-800/80 border-purple-500/30 text-white focus:border-purple-400 focus:ring-purple-400/20 text-base resize-none"
+                        className="text-sm px-4 rounded-md bg-slate-800/80 border-purple-500/30 text-white focus:border-purple-400 focus:ring-purple-400/20"
                       />
                       <p className="text-slate-400 text-sm">Tell people what makes your event special</p>
                     </div>
@@ -205,12 +205,12 @@ export default function CreateEvent() {
                 {/* Event Details */}
                 <Card className="bg-gradient-to-br from-slate-800/90 to-blue-900/20 border-blue-500/30 shadow-2xl">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-3 text-white text-2xl">
-                      <Calendar className="h-6 w-6 text-blue-400" />
+                    <CardTitle className="flex items-center gap-2 text-white text-xl">
+                      <Calendar className="h-4 w-4 text-blue-400" />
                       Event Details
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-6">
+                  <CardContent className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="date" className="text-blue-200 font-medium flex items-center gap-2">
@@ -223,7 +223,7 @@ export default function CreateEvent() {
                           value={formData.date}
                           onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                           required
-                          className="bg-slate-800/80 border-blue-500/30 text-white focus:border-blue-400 focus:ring-blue-400/20 h-12 [&::-webkit-calendar-picker-indicator]:invert"
+                          className="text-sm px-4 rounded-md h-10 bg-slate-800/80 border-blue-500/30 text-white focus:border-blue-400 focus:ring-blue-400/20 [&::-webkit-calendar-picker-indicator]:invert"
                         />
                       </div>
                       <div className="space-y-2">
@@ -237,7 +237,7 @@ export default function CreateEvent() {
                           value={formData.time}
                           onChange={(e) => setFormData({ ...formData, time: e.target.value })}
                           required
-                          className="bg-slate-800/80 border-blue-500/30 text-white focus:border-blue-400 focus:ring-blue-400/20 h-12"
+                          className="text-sm px-4 rounded-md h-10 bg-slate-800/80 border-blue-500/30 text-white focus:border-blue-400 focus:ring-blue-400/20 [&::-webkit-calendar-picker-indicator]:invert"
                         />
                       </div>
                     </div>
@@ -253,14 +253,14 @@ export default function CreateEvent() {
                         onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                         placeholder="Convention Center, Miami Beach, FL"
                         required
-                        className="bg-slate-800/80 border-blue-500/30 text-white focus:border-blue-400 focus:ring-blue-400/20 h-12 text-lg"
+                        className="text-sm px-4 rounded-md h-10 bg-slate-800/80 border-blue-500/30 text-white focus:border-blue-400 focus:ring-blue-400/20"
                       />
                       <p className="text-slate-400 text-sm">Where will your event take place?</p>
                     </div>
 
-                    <div className="space-y-2">
+                    {/* <div className="space-y-2">
                       <Label htmlFor="banner" className="text-blue-200 font-medium flex items-center gap-2">
-                        <Image className="h-4 w-4" />
+                        <ImageIcon className="h-4 w-4" />
                         Event Banner
                       </Label>
                       <div 
@@ -280,7 +280,7 @@ export default function CreateEvent() {
                           onChange={(e) => setFormData({ ...formData, bannerImage: e.target.files?.[0] || null })}
                         />
                       </div>
-                    </div>
+                    </div> */}
                   </CardContent>
                 </Card>
               </div>
@@ -290,12 +290,12 @@ export default function CreateEvent() {
                 {/* Ticket Configuration */}
                 <Card className="bg-gradient-to-br from-slate-800/90 to-green-900/20 border-green-500/30 shadow-2xl">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-3 text-white text-2xl">
-                      <Coins className="h-6 w-6 text-green-400" />
+                    <CardTitle className="flex items-center gap-3 text-white text-xl">
+                      <Coins className="h-4 w-4 text-green-400" />
                       Pricing
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-6">
+                  <CardContent className="space-y-4">
                     <div className="space-y-2">
                       <Label htmlFor="price" className="text-green-200 font-medium flex items-center gap-2">
                         <DollarSign className="h-4 w-4" />
@@ -311,9 +311,9 @@ export default function CreateEvent() {
                           onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                           placeholder="25.00"
                           required
-                          className="bg-slate-800/80 border-green-500/30 text-white focus:border-green-400 focus:ring-green-400/20 h-12 text-lg pr-16"
+                          className="text-sm px-4 rounded-md h-10 bg-slate-800/80 border-green-500/30 text-white focus:border-green-400 focus:ring-green-400/20 "
                         />
-                        <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-green-400 font-medium">
+                        <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-green-400 font-sm">
                           CELO
                         </span>
                       </div>
@@ -332,7 +332,7 @@ export default function CreateEvent() {
                         onChange={(e) => setFormData({ ...formData, totalSupply: e.target.value })}
                         placeholder="1000"
                         required
-                        className="bg-slate-800/80 border-green-500/30 text-white focus:border-green-400 focus:ring-green-400/20 h-12 text-lg"
+                        className="text-sm px-4 rounded-md h-10 bg-slate-800/80 border-green-500/30 text-white focus:border-green-400 focus:ring-green-400/20"
                       />
                       <p className="text-slate-400 text-sm">How many people can attend?</p>
                     </div>
@@ -342,22 +342,22 @@ export default function CreateEvent() {
                 {/* Revenue Summary */}
                 <Card className="bg-gradient-to-br from-slate-800/90 to-yellow-900/20 border-yellow-500/30 shadow-2xl">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-3 text-white text-2xl">
-                      <DollarSign className="h-6 w-6 text-yellow-400" />
+                    <CardTitle className="flex items-center gap-3 text-white text-xl">
+                      <DollarSign className="h-4 w-4 text-yellow-400" />
                       Revenue Summary
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
-                      <div className="flex justify-between items-center p-3 bg-slate-700/30 rounded-lg">
+                      <div className="text-sm px-4 rounded-md h-10 flex justify-between items-center bg-slate-700/30">
                         <span className="text-slate-300">Gross Revenue:</span>
                         <span className="text-white font-mono text-lg">{totalRevenue} CELO</span>
                       </div>
-                      <div className="flex justify-between items-center p-3 bg-slate-700/30 rounded-lg">
+                      <div className="text-sm px-4 rounded-md h-10 flex justify-between items-center bg-slate-700/30">
                         <span className="text-slate-300">Platform Fee (2.5%):</span>
                         <span className="text-red-400 font-mono">-{platformFee} CELO</span>
                       </div>
-                      <div className="flex justify-between items-center p-4 bg-gradient-to-r from-yellow-900/30 to-green-900/30 rounded-lg border border-yellow-500/30">
+                      <div className="text-sm px-4 rounded-md h-10 flex justify-between items-center bg-gradient-to-r from-yellow-900/30 to-green-900/30 border border-yellow-500/30">
                         <span className="text-yellow-200 font-medium">Your Earnings:</span>
                         <span className="text-yellow-400 font-bold font-mono text-xl">{yourEarnings} CELO</span>
                       </div>
@@ -367,26 +367,26 @@ export default function CreateEvent() {
 
                 {/* Create Button */}
                 <Card className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 border-purple-500/30 shadow-2xl">
-                  <CardContent className="p-6">
+                  <CardContent className="p-4">
                     <Button
                       type="submit"
                       size="lg"
                       disabled={isSubmitting || isTransactionPending}
-                      className="w-full text-lg py-6 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-500 hover:via-pink-500 hover:to-blue-500 text-white font-bold shadow-lg transform hover:scale-[1.02] transition-all duration-200"
+                      className="text-sm px-4 rounded-md h-10 w-full bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-500 hover:via-pink-500 hover:to-blue-500 text-white font-bold shadow-lg transform hover:scale-[1.02] transition-all duration-200"
                     >
                       {isSubmitting || isTransactionPending ? (
                         <div className="flex items-center gap-3">
-                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                           Creating Event...
                         </div>
                       ) : (
                         <div className="flex items-center gap-3">
-                          <Sparkles className="h-5 w-5" />
+                          <Sparkles className="h-4 w-4" />
                           Create Event & Launch
                         </div>
                       )}
                     </Button>
-                    <p className="text-slate-400 text-sm text-center mt-3">
+                    <p className="text-slate-400 text-xs text-center mt-2">
                       Your event will be deployed to the blockchain
                     </p>
                   </CardContent>
