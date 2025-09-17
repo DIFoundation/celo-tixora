@@ -1,5 +1,9 @@
 import type { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox-viem";
+import { vars } from "hardhat/config";
+
+const PRIVATE_KEY_2 = vars.get("PRIVATE_KEY_2");
+const CELOSCAN_API_KEY = vars.get("ETHERSCAN_API_KEY")
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -9,19 +13,20 @@ const config: HardhatUserConfig = {
         enabled: true,
         runs: 200,
       },
+      viaIR: true,
     },
   },
   networks: {
     // Celo Mainnet
     celo: {
       url: "https://forno.celo.org",
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [PRIVATE_KEY_2],
       chainId: 42220,
     },
     // Celo Alfajores Testnet
     alfajores: {
       url: "https://alfajores-forno.celo-testnet.org",
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [PRIVATE_KEY_2],
       chainId: 44787,
     },
     // Local development
@@ -32,8 +37,8 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
-      celo: process.env.CELOSCAN_API_KEY || "",
-      alfajores: process.env.CELOSCAN_API_KEY || "",
+      celo: process.env.CELOSCAN_API_KEY || CELOSCAN_API_KEY,
+      alfajores: process.env.CELOSCAN_API_KEY || CELOSCAN_API_KEY,
     },
     customChains: [
       {
