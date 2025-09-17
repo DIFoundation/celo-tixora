@@ -203,17 +203,17 @@ export default function Marketplace() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900/10 to-slate-900 text-foreground">
-      <div className="pb-16 px-4 pt-8">
+      <div className="pb-8 pt-4">
         <div className="container mx-auto max-w-7xl">
           {/* Hero Section */}
-          <div className="text-center mb-12">
-            <h1 className="text-6xl font-bold mb-6">
+          <div className="text-center mb-4">
+            <h1 className="text-3xl font-bold mb-4">
               Event{" "}
               <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
                 Marketplace
               </span>
             </h1>
-            <p className="text-xl text-slate-300 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-md text-slate-300 mx-auto leading-relaxed">
               Discover amazing events and secure your NFT tickets on the blockchain. 
               All transactions are verified, fraud-proof, and powered by smart contracts.
             </p>
@@ -221,11 +221,11 @@ export default function Marketplace() {
 
           {/* Network Warning */}
           {!isCorrectNetwork && (
-            <div className="mb-8">
+            <div className="mb-4">
               <Card className="bg-gradient-to-r from-orange-900/30 to-red-900/30 border-orange-500/50">
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3">
-                    <AlertCircle className="h-5 w-5 text-orange-400 flex-shrink-0" />
+                <CardContent className="p-2">
+                  <div className="flex items-center gap-2">
+                    <AlertCircle className="h-4 w-4 text-orange-400 flex-shrink-0" />
                     <div>
                       <p className="text-orange-200 font-medium">Wrong Network</p>
                       <p className="text-orange-300 text-sm">Please switch to Celo Sepolia testnet to interact with events.</p>
@@ -237,17 +237,17 @@ export default function Marketplace() {
           )}
 
           {/* Search and Filters */}
-          <div className="mb-12">
-            <div className="flex flex-col xl:flex-row gap-6">
+          <div className="mb-4">
+            <div className="flex flex-col xl:flex-row gap-3">
               {/* Search Bar */}
               <div className="flex-1 w-full">
                 <div className="relative group">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 text-slate-400 w-5 h-5 group-focus-within:text-purple-400 transition-colors" />
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 text-slate-400 w-4 h-4 group-focus-within:text-purple-400 transition-colors" />
                   <Input
                     placeholder="Search events by name, location, or category..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-12 h-12 bg-slate-800/50 border-slate-600 focus:border-purple-400 focus:ring-purple-400/20 text-white text-lg backdrop-blur-sm"
+                    className="text-sm px-4 rounded-md h-10 pl-12 bg-slate-800/50 border-slate-600 focus:border-purple-400 focus:ring-purple-400/20 text-white backdrop-blur-sm"
                   />
                   {searchTerm && (
                     <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
@@ -260,11 +260,11 @@ export default function Marketplace() {
               </div>
 
               {/* Sort Buttons */}
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-row gap-3 justify-between w-full">
                 <Button
                   variant={sortBy === "trending" ? "default" : "outline"}
                   onClick={() => setSortBy("trending")}
-                  className={`h-12 px-6 transition-all duration-200 ${
+                  className={`text-sm px-4 rounded-md h-10 transition-all duration-200 w-full ${
                     sortBy === "trending"
                       ? "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 shadow-lg"
                       : "border-slate-600 text-slate-300 hover:border-purple-500 hover:text-white"
@@ -276,7 +276,7 @@ export default function Marketplace() {
                 <Button
                   variant={sortBy === "recent" ? "default" : "outline"}
                   onClick={() => setSortBy("recent")}
-                  className={`h-12 px-6 transition-all duration-200 ${
+                  className={`text-sm px-4 rounded-md h-10 transition-all duration-200 w-full ${
                     sortBy === "recent"
                       ? "bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 shadow-lg"
                       : "border-slate-600 text-slate-300 hover:border-blue-500 hover:text-white"
@@ -290,9 +290,9 @@ export default function Marketplace() {
           </div>
 
           {/* Event Tabs */}
-          <div className="flex justify-center mb-12">
-            <div className="bg-slate-800/60 backdrop-blur-sm rounded-2xl p-2 border border-slate-600/50 shadow-xl">
-              <div className="flex flex-wrap gap-1">
+          <div className="flex justify-center mb-6">
+            <div className="bg-slate-800/60 backdrop-blur-sm rounded-xl p-2 border border-slate-600/50 shadow-xl">
+              <div className="flex flex-row ">
                 {[
                   { key: "upcoming", label: "Upcoming", color: "purple" },
                   { key: "passed", label: "Passed", color: "green" },
@@ -306,7 +306,7 @@ export default function Marketplace() {
                       key={tab.key}
                       variant={isActive ? "default" : "ghost"}
                       onClick={() => setActiveTab(tab.key)}
-                      className={`h-10 px-6 transition-all duration-200 ${
+                      className={`h-8 px-2 transition-all duration-200 ${
                         isActive
                           ? `bg-gradient-to-r ${
                               tab.color === "purple" ? "from-purple-600 to-pink-600" :
@@ -339,10 +339,10 @@ export default function Marketplace() {
 
           {/* Loading State */}
           {loading && (
-            <div className="text-center p-12">
+            <div className="text-center p-6">
               <Card className="bg-slate-800/50 border-purple-500/30 backdrop-blur-sm max-w-md mx-auto">
-                <CardContent className="p-8">
-                  <div className="w-12 h-12 border-4 border-purple-400 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                <CardContent className="p-6">
+                  <div className="w-10 h-10 border-4 border-purple-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
                   <h3 className="text-xl font-semibold text-white mb-2">Loading Events</h3>
                   <p className="text-slate-300">Fetching latest events from the blockchain...</p>
                 </CardContent>
