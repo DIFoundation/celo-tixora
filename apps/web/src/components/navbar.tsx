@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/sheet"
 import { useAccount } from "wagmi"
 import { WalletConnectButton } from "./connect-button"
-import { ConnectButton } from "@rainbow-me/rainbowkit"
 
 const navLinks = [
   { name: "Home", href: "/" },
