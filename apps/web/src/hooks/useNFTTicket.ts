@@ -1,9 +1,9 @@
-import { useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
+import { useReadContract, useWriteContract, useWaitForTransactionReceipt, useAccount } from 'wagmi';
 import { type Address, type Hash } from 'viem';
 // Import your ABI and contract address
 // import { TICKET_NFT_ABI, TICKET_NFT_ADDRESS } from '@/lib/contracts/ticketNft';
 
-import { useAccount } from 'wagmi'; // or your preferred web3 library
+// import { useAccount } from 'wagmi'; // or your preferred web3 library
 import { getContractAddresses, ChainId, ticketNftAbi } from '@/lib/addressAndAbi';
 
 // // Types
