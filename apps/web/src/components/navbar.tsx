@@ -30,13 +30,13 @@ export function Navbar() {
   
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-4">
+      <div className="container flex h-12 max-w-screen-2xl items-center justify-between px-4">
         <div className="flex items-center gap-2">
           {/* Mobile menu button */}
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
-                <Menu className="h-5 w-5" />
+                <Menu className="h-4 w-4" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
@@ -48,14 +48,14 @@ export function Navbar() {
                     alt="Tixora" 
                     width={40} 
                     height={40} 
-                    className="rounded-full h-10 w-10"
+                    className="rounded-full h-8 w-8"
                   />
                   <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                     Tixora
                   </span>
                 </Link>
               </div>
-              <nav className="flex flex-col gap-4">
+              <nav className="flex flex-col gap-3">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}

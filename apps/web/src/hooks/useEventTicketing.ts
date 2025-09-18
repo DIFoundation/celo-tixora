@@ -51,6 +51,9 @@ export function useEventTicketingGetters() {
 // Getter Hook
 // export const useEventTicketingGetters = ({ chainId }: UseEventTicketingGettersProps = {}) => {
   // Get fee recipient
+
+  const { isLoading: checkingRegistration, data: isRegistered } = useReadContract()
+
   const useFeeRecipient = () => {
     return useReadContract({
       address: eventTicketing as Address,
@@ -209,6 +212,9 @@ export function useEventTicketingGetters() {
   };
 
   return {
+    checkingRegistration,
+    isRegistered,
+    
     useFeeRecipient,
     useGetRecentTickets,
     useGetRegistrants,

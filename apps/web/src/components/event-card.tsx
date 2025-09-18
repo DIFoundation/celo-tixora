@@ -5,11 +5,11 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, MapPin, Users, Ticket, Loader2, Clock } from "lucide-react"
 import Image from "next/image"
-import { useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
-import { eventTicketingAbi, eventTicketingAddress } from "@/lib/addressAndAbi"
-import { useEventRegistration } from "@/hooks/use-event-registration"
+import { useWriteContract, useWaitForTransactionReceipt, useBalance } from 'wagmi'
+import { useEventTicketingGetters, useEventTicketingSetters } from '../hooks/useEventTicketing'
 import { useAccount } from "wagmi"
 import { toast } from "react-toastify"
+import { getBalance } from "viem/actions"
 
 interface MarketplaceEvent {
   id: number
@@ -36,15 +36,17 @@ export function EventCard({ event }: EventCardProps) {
   const { writeContract, isPending, data: hash , error: writeError} = useWriteContract()
   const [purchasing, setPurchasing] = useState(false)
   const [imageError, setImageError] = useState(false)
-  const { address, isConnected, chainId } = useAccount()
-  
-  const { isRegistered, isLoading: checkingRegistration } = useEventRegistration(event.id, address)
+  const { address, isConnected, chainId,  } = useAccount()
   
   // Wait for transaction receipt
   const { isLoading: isConfirming, isSuccess, error: receiptError } = useWaitForTransactionReceipt({
     hash,
   })
-
+  
+  const { register } = useEventTicketingSetters()
+  const { useIsRegistered } = useEventTicketingGetters()
+  const { data: isRegistered, isLoading: checkingRegistration } = useIsRegistered(BigInt(event.id), address)
+  
   const getStatusBadge = (event: MarketplaceEvent) => {
     if (event.status === "passed") {
       return <Badge className="bg-gray-500 text-white">Passed</Badge>
@@ -89,8 +91,8 @@ export function EventCard({ event }: EventCardProps) {
       const balance = await window.ethereum.request({
         method: 'eth_getBalance',
         params: [address, 'latest']
-      })
-      
+      } as any);
+            
       const requiredAmount = event.originalPrice
       const userBalance = BigInt(balance)
       
@@ -103,13 +105,14 @@ export function EventCard({ event }: EventCardProps) {
       toast.info(`Purchasing ticket for "${event.eventTitle}", click Confirm in your wallet to approve the transaction...`)
       // Call the smart contract to register for the event
       try {
-        const result = writeContract({
-          address: eventTicketingAddress,
-          abi: eventTicketingAbi,
-          functionName: 'register',
-          args: [BigInt(event.id)],
-          value: event.originalPrice,
-        })
+        const result = register(BigInt(event.id), event.originalPrice)
+        // const result = writeContract({
+        //   address: eventTicketingAddress,
+        //   abi: eventTicketingAbi,
+        //   functionName: 'register',
+        //   args: [BigInt(event.id)],
+        //   value: event.originalPrice,
+        // })
         
         console.log('Write contract result:', result)
       } catch (contractError) {

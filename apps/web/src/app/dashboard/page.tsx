@@ -10,9 +10,9 @@ import Link from "next/link"
 import { useMemo, useEffect, useState } from "react"
 import { formatEther } from "viem"
 // import { toast } from "react-toastify"
-import { eventTicketingAbi, eventTicketingAddress } from "../../lib/addressAndAbi"
 import { useReadContract, useReadContracts } from "wagmi"
 import { DialogContent, DialogTitle } from "@radix-ui/react-dialog"
+import { useEventTicketingGetters } from "../../hooks/useEventTicketing"
 
 export default function Dashboard() {
   const { address, isConnected } = useAccount()
@@ -24,19 +24,13 @@ export default function Dashboard() {
     totalRevenue: "0"
   })
 
+  const { useGetRecentTickets, useGetTotalTickets } = useEventTicketingGetters()
+
   // Get total tickets count
-  const { data: totalTickets, isLoading: loadingTotalTickets } = useReadContract({
-    address: eventTicketingAddress,
-    abi: eventTicketingAbi,
-    functionName: 'getTotalTickets',
-  })
+  const { data: totalTickets, isLoading: loadingTotalTickets } = useGetTotalTickets()
 
   // Get recent tickets data
-  const { data: recentTicketsData, isLoading: loadingRecentTickets } = useReadContract({
-    address: eventTicketingAddress,
-    abi: eventTicketingAbi,
-    functionName: 'getRecentTickets',
-  })
+  const { data: recentTicketsData, isLoading: loadingRecentTickets } = useGetRecentTickets()
 
   // Calculate user-specific stats
   useEffect(() => {
@@ -200,7 +194,7 @@ export default function Dashboard() {
               <h2 className="text-2xl font-semibold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                 Platform Overview
               </h2>
-              <div className="grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-8">
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <Card className="bg-gradient-to-br from-slate-800/80 to-purple-900/30 border-purple-500/30">
                   <CardContent className="p-4 text-center">
                     <p className="text-xl font-bold text-white">{platformStats.totalEvents}</p>
