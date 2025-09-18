@@ -12,15 +12,15 @@ import {
 
 export const config = createConfig({
   chains: [
+    celoSepolia,
     celo, 
     celoAlfajores, 
-    celoSepolia
   ],
   connectors: [miniAppConnector()],
   transports: {
+    [celoSepolia.id]: http(),
     [celo.id]: http(),
     [celoAlfajores.id]: http(),
-    [celoSepolia.id]: http(),
   },
 });
 
