@@ -9,10 +9,22 @@ import {
   type NFTTicket 
 } from '@/lib/contracts'
 
+import { useAccount } from 'wagmi'; // or your preferred web3 library
+import { getContractAddresses, ChainId } from '@/lib/addressAndAbi';
+
+function useContract() {
+  const { chain } = useAccount();
+  const chainId = chain?.id || ChainId.CELO_MAINNET; // default to mainnet
+
+  const { ticketNft, eventTicketing, resaleMarket } = getContractAddresses(chainId);
+
+
+}
+
 // Hook for reading recent tickets from EventTicketing contract
 export function useRecentTickets() {
   const { data, isError, isLoading, refetch } = useReadContract({
-    address: eventTicketingAddress,
+    address: eventTicketing,
     abi: eventTicketingAbi,
     functionName: 'getRecentTickets',
   })
