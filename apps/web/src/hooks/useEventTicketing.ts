@@ -1,5 +1,5 @@
 import { useReadContract, useWriteContract, useWaitForTransactionReceipt, useAccount } from 'wagmi';
-import { type Address, type Hash } from 'viem';
+import { Address } from 'viem';
 import { getContractAddresses, ChainId, eventTicketingAbi } from '@/lib/addressAndAbi';
 
 // Import your ABI and contract address
@@ -44,7 +44,7 @@ export function useEventTicketingGetters() {
     const { chain } = useAccount();
     const chainId = chain?.id || ChainId.CELO_SEPOLIA; // default to mainnet
   
-    const { ticketNft, eventTicketing, resaleMarket } = getContractAddresses(chainId);
+    const { eventTicketing } = getContractAddresses(chainId);
   
   
   

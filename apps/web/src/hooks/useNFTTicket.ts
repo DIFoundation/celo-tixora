@@ -1,5 +1,5 @@
 import { useReadContract, useWriteContract, useWaitForTransactionReceipt, useAccount } from 'wagmi';
-import { type Address, type Hash } from 'viem';
+import { Address } from 'viem';
 // Import your ABI and contract address
 // import { TICKET_NFT_ABI, TICKET_NFT_ADDRESS } from '@/lib/contracts/ticketNft';
 
@@ -27,7 +27,7 @@ export function useTicketNFTGetters() {
     const { chain } = useAccount();
     const chainId = chain?.id || ChainId.CELO_SEPOLIA; // default to mainnet
   
-    const { ticketNft, eventTicketing, resaleMarket } = getContractAddresses(chainId);
+    const { ticketNft } = getContractAddresses(chainId);
   
   
   
