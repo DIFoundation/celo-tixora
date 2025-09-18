@@ -286,7 +286,7 @@ export default function Marketplace() {
           {/* Event Tabs */}
           <div className="flex justify-center mb-6">
             <div className="bg-slate-800/60 backdrop-blur-sm rounded-xl p-2 border border-slate-600/50 shadow-xl w-full">
-              <div className="flex flex-row justify-between">
+              <div className="flex flex-row justify-between w-full">
                 {[
                   { key: "upcoming", label: "Upcoming", color: "purple" },
                   { key: "passed", label: "Passed", color: "green" },
@@ -300,7 +300,7 @@ export default function Marketplace() {
                       key={tab.key}
                       variant={isActive ? "default" : "ghost"}
                       onClick={() => setActiveTab(tab.key)}
-                      className={`h-8 px-2 transition-all duration-200 ${
+                      className={`h-8 px-1 transition-all duration-200 w-full text-xs ${
                         isActive
                           ? `bg-gradient-to-r ${
                               tab.color === "purple" ? "from-purple-600 to-pink-600" :
@@ -315,7 +315,7 @@ export default function Marketplace() {
                       {count > 0 && (
                         <Badge 
                           variant="secondary" 
-                          className={`ml-2 text-xs ${
+                          className={`ml-0.5 text-xs ${
                             isActive 
                               ? "bg-white/20 text-white" 
                               : "bg-slate-600/50 text-slate-300"
@@ -415,7 +415,7 @@ export default function Marketplace() {
           
           {/* Platform Stats */}
           {!loading && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card className="bg-gradient-to-br from-slate-800/60 to-purple-900/30 border-purple-500/30 backdrop-blur-sm hover:border-purple-400/50 transition-all duration-300">
                 <CardContent className="p-4 text-center">
                   <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center mx-auto mb-4">

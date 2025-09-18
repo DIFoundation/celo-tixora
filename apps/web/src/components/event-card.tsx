@@ -218,7 +218,7 @@ export function EventCard({ event }: EventCardProps) {
       <CardContent className="p-0 h-full flex flex-col">
         <div className="relative h-48 overflow-hidden rounded-t-lg">
           <Image
-            src={imageError ? "/tixora-logo.png" : event.image || "/tixora-logo.png"}
+            src="/metaverse-fashion-show.png"
             alt={event.eventTitle}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
