@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useAccount, useReadContract, useWaitForTransactionReceipt } from 'wagmi'
+import { useAccount } from 'wagmi'
 import { Search, Filter, TrendingUp, Clock, Calendar, MapPin, Users, Tag, Sparkles, AlertCircle } from "lucide-react"
-import { eventTicketingAbi, eventTicketingAddress } from "@/lib/addressAndAbi"
+import { useEventTicketingGetters } from "../../hooks/useEventTicketing"
 import { formatEther } from "viem"
 import { EventCard } from "@/components/event-card"
 import { Card, CardContent } from "@/components/ui/card"
@@ -55,22 +55,16 @@ export default function Marketplace() {
   const [activeTab, setActiveTab] = useState("upcoming")
   const [events, setEvents] = useState<MarketplaceEvent[]>([])
   const [loading, setLoading] = useState(true)
+
+  const { useGetTotalTickets, useGetRecentTickets } = useEventTicketingGetters()
   
   // Check if user is on the correct network
   const isCorrectNetwork = chainId === 11142220 // Celo Sepolia testnet
 
   // Read contract data
-  const { data: totalTickets, error: totalTicketsError } = useReadContract({
-    address: eventTicketingAddress,
-    abi: eventTicketingAbi,
-    functionName: 'getTotalTickets',
-  })
+  const { data: totalTickets, error: totalTicketsError } = useGetTotalTickets()
 
-  const { data: recentTickets, error: recentTicketsError } = useReadContract({
-    address: eventTicketingAddress,
-    abi: eventTicketingAbi,
-    functionName: 'getRecentTickets',
-  })
+  const { data: recentTickets, error: recentTicketsError } = useGetRecentTickets()
 
   // Handle contract errors
   useEffect(() => {
@@ -291,8 +285,8 @@ export default function Marketplace() {
 
           {/* Event Tabs */}
           <div className="flex justify-center mb-6">
-            <div className="bg-slate-800/60 backdrop-blur-sm rounded-xl p-2 border border-slate-600/50 shadow-xl">
-              <div className="flex flex-row ">
+            <div className="bg-slate-800/60 backdrop-blur-sm rounded-xl p-2 border border-slate-600/50 shadow-xl w-full">
+              <div className="flex flex-row justify-between">
                 {[
                   { key: "upcoming", label: "Upcoming", color: "purple" },
                   { key: "passed", label: "Passed", color: "green" },

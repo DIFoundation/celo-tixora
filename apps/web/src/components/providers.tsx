@@ -13,7 +13,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ErudaProvider>
       <FrameWalletProvider>
-        <MiniAppProvider addMiniAppOnLoad={true}>{children}</MiniAppProvider>
+        <MiniAppProvider addMiniAppOnLoad={true}>
+          {children}
+        </MiniAppProvider>
       </FrameWalletProvider>
     </ErudaProvider>
   );
