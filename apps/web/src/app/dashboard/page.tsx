@@ -174,14 +174,14 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900 text-foreground pt-6">
+    <div className="min-h-screen bg-[#11112d] text-foreground pt-6">
       <div className="pb-12">
         <div className="container mx-auto">
           {/* Welcome Section */}
           <div className="mb-8">
-            <h1 className="text-4xl font-bold mb-3">
+            <h1 className="text-4xl font-bold mb-3 text-[#CBD5E1]">
               Welcome back,{" "}
-              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#A855F7] to-[#EC4899] bg-clip-text text-transparent">
                 {shortAddress}
               </span>
             </h1>
@@ -195,27 +195,27 @@ export default function Dashboard() {
                 Platform Overview
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <Card className="bg-gradient-to-br from-slate-800/80 to-purple-900/30 border-purple-500/30">
+                <Card className="bg-gradient-to-br from-[#A855F7] to-[#244376] border-[#1E293B]">
                   <CardContent className="p-4 text-center">
-                    <p className="text-xl font-bold text-white">{platformStats.totalEvents}</p>
+                    <p className="text-2xl font-bold text-white">{platformStats.totalEvents}</p>
                     <p className="text-slate-300 text-sm">Total Events</p>
                   </CardContent>
                 </Card>
-                <Card className="bg-gradient-to-br from-slate-800/80 to-blue-900/30 border-blue-500/30">
+                <Card className="bg-gradient-to-br from-[#A855F7] to-[#244376] border-[#1E293B]">
                   <CardContent className="p-4 text-center">
-                    <p className="text-xl font-bold text-white">{platformStats.activeEvents}</p>
+                    <p className="text-2xl font-bold text-white">{platformStats.activeEvents}</p>
                     <p className="text-slate-300 text-sm">Active Events</p>
                   </CardContent>
                 </Card>
-                <Card className="bg-gradient-to-br from-slate-800/80 to-green-900/30 border-green-500/30">
+                <Card className="bg-gradient-to-br from-[#A855F7] to-[#244376] border-[#1E293B]">
                   <CardContent className="p-4 text-center">
-                    <p className="text-xl font-bold text-white">{platformStats.totalTicketsSold}</p>
+                    <p className="text-2xl font-bold text-white">{platformStats.totalTicketsSold}</p>
                     <p className="text-slate-300 text-sm">Tickets Sold</p>
                   </CardContent>
                 </Card>
-                <Card className="bg-gradient-to-br from-slate-800/80 to-orange-900/30 border-orange-500/30">
+                <Card className="bg-gradient-to-br from-[#A855F7] to-[#244376] border-[#1E293B]">
                   <CardContent className="p-4 text-center">
-                    <p className="text-xl font-bold text-white">{platformStats.totalPlatformRevenue}</p>
+                    <p className="text-2xl font-bold text-white">{platformStats.totalPlatformRevenue}</p>
                     <p className="text-slate-300 text-sm">Platform Revenue (CELO)</p>
                   </CardContent>
                 </Card>
@@ -232,7 +232,7 @@ export default function Dashboard() {
               {stats.map((stat, index) => {
                 const Icon = stat.icon
                 return (
-                  <Card key={index} className="bg-gradient-to-br from-slate-800/80 to-purple-900/30 border-purple-500/30 overflow-hidden relative">
+                  <Card key={index} className="bg-gradient-to-br from-[#A855F7] to-[#244376] border-[#1E293B] overflow-hidden relative">
                     <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-10`} />
                     <CardContent className="p-4 relative z-10">
                       <div className="flex items-center justify-between mb-2">
@@ -240,7 +240,7 @@ export default function Dashboard() {
                         <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${stat.color}`} />
                       </div>
                       <div>
-                        <p className="text-xl font-bold text-white mb-2">
+                        <p className="text-2xl font-bold text-white mb-2">
                           {stat.value}
                         </p>
                         <p className="text-slate-300 font-medium mb-1">{stat.label}</p>
@@ -264,7 +264,7 @@ export default function Dashboard() {
                   const Icon = action.icon
                   return (
                     <Link key={index} href={action.href}>
-                      <Card className="group cursor-pointer bg-gradient-to-br from-slate-800/80 to-purple-900/30 border-purple-500/30 overflow-hidden relative hover:border-purple-400/60 transition-all duration-300">
+                      <Card className="group cursor-pointer bg-gradient-to-br from-purple-800 to-blue-800 border-[#47628f] overflow-hidden relative hover:border-purple-400/60 transition-all duration-300">
                         <div className={`absolute inset-0 bg-gradient-to-br ${action.gradient} opacity-5 group-hover:opacity-10 transition-opacity`} />
                         <CardContent className="flex flex-col items-center justify-center p-4 text-center relative z-10 h-48 w-48">
                           <div
@@ -285,7 +285,7 @@ export default function Dashboard() {
 
           {/* Recent Activity Section */}
           <div>
-            <Card className="bg-gradient-to-br from-slate-800/80 to-purple-900/30 border-purple-500/30">
+            <Card className="bg-gradient-to-br from-[#282961] to-[#47628f] border-purple-500/30">
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-white text-xl">
                   <Activity className="h-4 w-4 text-purple-400" />
