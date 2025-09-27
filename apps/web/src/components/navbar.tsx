@@ -27,11 +27,25 @@ export function Navbar() {
   const pathname = usePathname()
   const { isConnected } = useAccount()
 
-  
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-blue-800/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-12 max-w-screen-2xl items-center justify-between px-4">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 justify-between w-full">
+
+          <Link href="/" className="flex items-center space-x-2">
+            <Image
+              src="/logo.svg"
+              alt="Tixora"
+              width={40}
+              height={40}
+              className="rounded-full h-8 w-8"
+            />
+            <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              Tixora
+            </span>
+          </Link>
+
           {/* Mobile menu button */}
           <Sheet>
             <SheetTrigger asChild>
@@ -40,14 +54,14 @@ export function Navbar() {
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-80">
+            <SheetContent side="right" className="w-100">
               <div className="flex items-center gap-2 mb-4">
-              <Link href="/" className="flex items-center space-x-2">
-                  <Image 
-                    src="/logo.svg" 
-                    alt="Tixora" 
-                    width={40} 
-                    height={40} 
+                <Link href="/" className="flex items-center space-x-2">
+                  <Image
+                    src="/logo.svg"
+                    alt="Tixora"
+                    width={40}
+                    height={40}
                     className="rounded-full h-8 w-8"
                   />
                   <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
@@ -62,9 +76,8 @@ export function Navbar() {
                     href={link.href}
                     target={link.external ? "_blank" : undefined}
                     rel={link.external ? "noopener noreferrer" : undefined}
-                    className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${
-                      pathname === link.href ? "text-foreground" : "text-foreground/70"
-                    }`}
+                    className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${pathname === link.href ? "text-foreground" : "text-foreground/70"
+                      }`}
                   >
                     {link.name}
                     {link.external && <ExternalLink className="h-4 w-4" />}
@@ -78,13 +91,13 @@ export function Navbar() {
           </Sheet>
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <span className="hidden font-bold sm:inline-block text-xl bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <Link href="/" className="hidden md:flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <span className="font-bold sm:inline-block text-xl bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
               Tixora
             </span>
           </Link>
         </div>
-        
+
         {/* Desktop navigation */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
@@ -93,17 +106,16 @@ export function Navbar() {
               href={link.href}
               target={link.external ? "_blank" : undefined}
               rel={link.external ? "noopener noreferrer" : undefined}
-              className={`flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-primary ${
-                pathname === link.href
-                  ? "text-foreground"
-                  : "text-foreground/70"
-              }`}
+              className={`flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-primary ${pathname === link.href
+                ? "text-foreground"
+                : "text-foreground/70"
+                }`}
             >
               {link.name}
               {link.external && <ExternalLink className="h-4 w-4" />}
             </Link>
           ))}
-          
+
           <div className="flex items-center gap-3">
             <Button variant="outline" size="sm">
               <WalletConnectButton />
