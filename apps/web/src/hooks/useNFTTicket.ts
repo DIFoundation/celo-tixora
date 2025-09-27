@@ -1,27 +1,7 @@
 import { useReadContract, useWriteContract, useWaitForTransactionReceipt, useAccount } from 'wagmi';
 import { Address } from 'viem';
-// Import your ABI and contract address
-// import { TICKET_NFT_ABI, TICKET_NFT_ADDRESS } from '@/lib/contracts/ticketNft';
 
-// import { useAccount } from 'wagmi'; // or your preferred web3 library
 import { getContractAddresses, ChainId, ticketNftAbi } from '@/lib/addressAndAbi';
-
-// // Types
-// interface TicketMetadata {
-//   ticketId: bigint;
-//   eventName: string;
-//   description: string;
-//   eventTimestamp: bigint;
-//   location: string;
-// }
-
-// interface UseTicketNFTGettersProps {
-//   chainId?: number;
-// }
-
-// interface UseTicketNFTSettersProps {
-//   chainId?: number;
-// }
 
 export function useTicketNFTGetters() {
     const { chain } = useAccount();
@@ -29,12 +9,6 @@ export function useTicketNFTGetters() {
   
     const { ticketNft } = getContractAddresses(chainId);
   
-  
-  
-
-// Getter Hook
-// export const useTicketNFTGetters = ({ chainId }: UseTicketNFTGettersProps = {}) => {
-  // Balance of specific address
   const useBalanceOf = (owner?: Address) => {
     return useReadContract({
       address: ticketNft as Address,
@@ -200,12 +174,10 @@ export function useTicketNFTGetters() {
 
 export function useTicketNFTSetters() {
     const { chain } = useAccount();
-    const chainId = chain?.id || ChainId.CELO_SEPOLIA; // default to mainnet
+    const chainId = chain?.id || ChainId.CELO_SEPOLIA;
   
-    const { ticketNft, eventTicketing, resaleMarket } = getContractAddresses(chainId);
+    const { ticketNft } = getContractAddresses(chainId);
 
-// Setter Hook
-// export const useTicketNFTSetters = ({ chainId }: UseTicketNFTSettersProps = {}) => {
   const { writeContract, data: hash, error, isPending } = useWriteContract();
 
   // Wait for transaction confirmation
@@ -351,44 +323,3 @@ export function useTicketNFTSetters() {
     transferOwnership,
   };
 };
-
-// Usage Examples:
-/*
-// For getter functions
-const getters = useTicketNFTGetters({
-  chainId: 1, // Optional - Ethereum mainnet
-});
-
-// Use individual hooks
-const { data: balance, isLoading: balanceLoading } = getters.useBalanceOf('0x...' as Address);
-const { data: metadata, isLoading: metadataLoading } = getters.useGetTicketMetadata(BigInt(1));
-
-// For setter functions
-const {
-  approve,
-  mintForRegistrant,
-  isPending,
-  isConfirming,
-  isConfirmed,
-  hash,
-  error
-} = useTicketNFTSetters({
-  chainId: 1, // Optional
-});
-
-// Example usage
-const handleApprove = () => {
-  approve('0x...' as Address, BigInt(1));
-};
-
-const handleMint = () => {
-  mintForRegistrant(
-    '0x...' as Address,
-    BigInt(1),
-    'Event Name',
-    'Event Description',
-    BigInt(Math.floor(Date.now() / 1000)),
-    'Event Location'
-  );
-};
-*/

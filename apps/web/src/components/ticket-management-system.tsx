@@ -15,12 +15,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Label } from "@/components/ui/label"
-import { useAccount, useReadContract, useReadContracts } from 'wagmi'
-import { useUserTickets, useNFTTokenDetails, useTransferTicket } from "@/hooks/use-contracts"
+import { useAccount } from 'wagmi'
+import { useEventTicketingGetters, useEventTicketingSetters } from "@/hooks/useEventTicketing"
 import Link from "next/link"
 import Image from "next/image"
-import { eventTicketingAbi, eventTicketingAddress } from "@/lib/addressAndAbi"
-import { Abi, formatEther } from 'viem'
+import { formatEther } from 'viem'
 
 interface NFTTicketDisplay {
   id: string
@@ -43,36 +42,24 @@ export function TicketManagementSystem() {
   const [selectedTicket, setSelectedTicket] = useState<NFTTicketDisplay | null>(null)
   const [currentAction, setCurrentAction] = useState<TicketAction>(null)
   const [transferAddress, setTransferAddress] = useState("")
-
   const { isConnected, address } = useAccount()
-  const { transferTicket, isPending: isTransferring, isConfirmed } = useTransferTicket()
+  const { useGetRecentTickets, useIsRegistered } = useEventTicketingGetters()
+  const { isConfirmed } = useEventTicketingSetters()
 
   // Fetch all recent tickets
-  const { data: allTickets } = useReadContract({
-    address: eventTicketingAddress,
-    abi: eventTicketingAbi,
-    functionName: 'getRecentTickets',
-  }) as { data: Array<{ id: number, eventName: string, eventTimestamp: number, location: string, price: bigint }> | undefined }
+  const { data: allTickets } = useGetRecentTickets()
+  console.log("all tickets: ", allTickets)
 
   // Check registration status for each ticket
-  const registrationChecks = useReadContracts({
-    contracts: (allTickets || []).map((ticket) => ({
-      address: eventTicketingAddress as `0x${string}`,
-      abi: eventTicketingAbi as Abi,
-      functionName: 'isRegistered',
-      args: [BigInt(ticket.id), address],
-    })),
-    query: {
-      enabled: !!allTickets && allTickets.length > 0 && !!address,
-    },
-  })
+  const registrationChecks = useIsRegistered(ticketId, address)
+  console.log("registration checks: ", registrationChecks)
 
   // Filter tickets to only include those registered by the user
   const userTickets = useMemo(() => {
     if (!allTickets || !registrationChecks.data) return []
 
     return allTickets
-      .filter((_, index) => registrationChecks.data?.[index]?.result === true)
+      .filter((ticket, index) => registrationChecks.data?.[index]?.result === true)
       .map((ticket) => {
         const now = Math.floor(Date.now() / 1000)
         const isPast = Number(ticket.eventTimestamp) < now
