@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button"
 import {
   Sheet,
   SheetContent,
+  SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { useAccount } from "wagmi"
@@ -33,6 +35,7 @@ export function Navbar() {
       <div className="container flex h-12 max-w-screen-2xl items-center justify-between px-4">
         <div className="flex items-center gap-2 justify-between w-full">
 
+          {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <Image
               src="/logo.svg"
@@ -55,6 +58,9 @@ export function Navbar() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-100">
+              <SheetHeader className="sr-only">
+                <SheetTitle>Navigation Menu</SheetTitle>
+              </SheetHeader>
               <div className="flex items-center gap-2 mb-4">
                 <Link href="/" className="flex items-center space-x-2">
                   <Image
@@ -89,13 +95,6 @@ export function Navbar() {
               </nav>
             </SheetContent>
           </Sheet>
-
-          {/* Logo */}
-          <Link href="/" className="hidden md:flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <span className="font-bold sm:inline-block text-xl bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-              Tixora
-            </span>
-          </Link>
         </div>
 
         {/* Desktop navigation */}
