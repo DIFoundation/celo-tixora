@@ -228,7 +228,7 @@ export function TicketManagementSystem() {
                 className={` h-10
                   ${selectedCategory === "all"
                     ? "bg-purple-600 hover:bg-purple-700"
-                    : "border-slate-600 text-slate-300 hover:border-purple-500"
+                    : "border-slate-600 text-slate-600 hover:border-purple-500"
                   }
                 `}
               >
@@ -241,7 +241,7 @@ export function TicketManagementSystem() {
                 className={` w-full h-10
                   ${selectedCategory === "upcoming"
                     ? "bg-purple-600 hover:bg-purple-700"
-                    : "border-slate-600 text-slate-300 hover:border-purple-500"
+                    : "border-slate-600 text-slate-600 hover:border-purple-500"
                   }
                 `}
               >
@@ -254,7 +254,7 @@ export function TicketManagementSystem() {
                 className={`w-full h-10
                   ${selectedCategory === "past"
                     ? "bg-purple-600 hover:bg-purple-700"
-                    : "border-slate-600 text-slate-300 hover:border-purple-500"
+                    : "border-slate-600 text-slate-600 hover:border-purple-500"
                   }
                 `}
               >
