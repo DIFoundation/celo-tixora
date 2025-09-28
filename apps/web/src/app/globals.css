@@ -93,3 +93,24 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+/* hide scrollbar */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+html::-webkit-scrollbar {
+  width: 0.25em;
+}
+
+html::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 0.25em;
+  border: 0.25em solid #f1f1f1;
+}
