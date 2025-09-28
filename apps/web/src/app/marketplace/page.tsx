@@ -196,14 +196,14 @@ export default function Marketplace() {
   const filteredEvents = getEventsByTab()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900/10 to-slate-900 text-foreground">
+    <div className="min-h-screen bg-gradient-to-br from-[#0A0A1A] to-[#0A0A1A] text-foreground">
       <div className="pb-8 pt-4">
         <div className="container mx-auto max-w-7xl">
           {/* Hero Section */}
           <div className="text-center mb-4">
-            <h1 className="text-3xl font-bold mb-4">
+            <h1 className="text-3xl text-[#ffffff] font-bold mb-4">
               Event{" "}
-              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                 Marketplace
               </span>
             </h1>
@@ -261,7 +261,7 @@ export default function Marketplace() {
                   className={`text-sm px-4 rounded-md h-10 transition-all duration-200 w-full ${
                     sortBy === "trending"
                       ? "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 shadow-lg"
-                      : "border-slate-600 text-slate-300 hover:border-purple-500 hover:text-white"
+                      : "border-slate-600 text-slate-800 hover:border-purple-500 hover:text-purple-500"
                   }`}
                 >
                   <TrendingUp className="w-5 h-5 mr-2" />
@@ -273,7 +273,7 @@ export default function Marketplace() {
                   className={`text-sm px-4 rounded-md h-10 transition-all duration-200 w-full ${
                     sortBy === "recent"
                       ? "bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 shadow-lg"
-                      : "border-slate-600 text-slate-300 hover:border-blue-500 hover:text-white"
+                      : "border-slate-600 text-slate-800 hover:border-blue-500 hover:text-blue-500"
                   }`}
                 >
                   <Clock className="w-5 h-5 mr-2" />
@@ -416,7 +416,7 @@ export default function Marketplace() {
           {/* Platform Stats */}
           {!loading && (
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Card className="bg-gradient-to-br from-slate-800/60 to-purple-900/30 border-purple-500/30 backdrop-blur-sm hover:border-purple-400/50 transition-all duration-300">
+              <Card className="bg-[#1d407943] border-purple-500/30 backdrop-blur-sm hover:border-purple-400/50 transition-all duration-300">
                 <CardContent className="p-4 text-center">
                   <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center mx-auto mb-4">
                     <Calendar className="h-8 w-8 text-white" />
@@ -428,7 +428,7 @@ export default function Marketplace() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-slate-800/60 to-green-900/30 border-green-500/30 backdrop-blur-sm hover:border-green-400/50 transition-all duration-300">
+              <Card className="bg-[#1d407943] border-green-500/30 backdrop-blur-sm hover:border-green-400/50 transition-all duration-300">
                 <CardContent className="p-4 text-center">
                   <div className="w-16 h-16 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center mx-auto mb-4">
                     <TrendingUp className="h-8 w-8 text-white" />
@@ -440,7 +440,7 @@ export default function Marketplace() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-slate-800/60 to-blue-900/30 border-blue-500/30 backdrop-blur-sm hover:border-blue-400/50 transition-all duration-300">
+              <Card className="bg-[#1d407943] border-blue-500/30 backdrop-blur-sm hover:border-blue-400/50 transition-all duration-300">
                 <CardContent className="p-4 text-center">
                   <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center mx-auto mb-4">
                     <Users className="h-8 w-8 text-white" />
@@ -452,7 +452,7 @@ export default function Marketplace() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-slate-800/60 to-yellow-900/30 border-yellow-500/30 backdrop-blur-sm hover:border-yellow-400/50 transition-all duration-300">
+              <Card className="bg-[#1d407943] border-yellow-500/30 backdrop-blur-sm hover:border-yellow-400/50 transition-all duration-300">
                 <CardContent className="p-4 text-center">
                   <div className="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 flex items-center justify-center mx-auto mb-4">
                     <Sparkles className="h-8 w-8 text-white" />

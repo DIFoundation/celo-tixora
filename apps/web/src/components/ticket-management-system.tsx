@@ -50,8 +50,14 @@ export function TicketManagementSystem() {
   const { data: allTickets } = useGetRecentTickets()
   console.log("all tickets: ", allTickets)
 
+  // Get array of ticket IDs for registration check
+  const ticketIds = useMemo(() => 
+    allTickets?.map(ticket => BigInt(ticket.id)) || [], 
+    [allTickets]
+  )
+
   // Check registration status for each ticket
-  const registrationChecks = useIsRegistered(ticketId, address)
+  const registrationChecks = useIsRegistered(ticketIds, address)
   console.log("registration checks: ", registrationChecks)
 
   // Filter tickets to only include those registered by the user
