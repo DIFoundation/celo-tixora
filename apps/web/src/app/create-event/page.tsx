@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "react-toastify"
 import { Upload, Calendar, MapPin, Users, DollarSign, Sparkles, ArrowLeft, Clock, Image, FileText, Coins, ImageIcon } from "lucide-react"
-import { eventTicketingAddress, eventTicketingAbi } from "@/lib/addressAndAbi"
+import { useEventTicketingSetters } from '@/hooks/useEventTicketing'
 import Link from "next/link"
 
 export default function CreateEvent() {
@@ -28,96 +28,90 @@ export default function CreateEvent() {
     bannerImage: null as File | null,
   })
 
-  const { writeContract, data: hash, isPending: isSubmitting, error: writeError } = useWriteContract()
-  const { isLoading: isTransactionPending, isSuccess: isTransactionSuccess, error: transactionError } = useWaitForTransactionReceipt({
-    hash,
-  })
+  const { createTicket, isPending, isConfirming, isConfirmed, error } = useEventTicketingSetters();
 
   useEffect(() => {
-    if (isSubmitting) {
+    if (isPending) {
       toast.info("Creating event on blockchain...")
     }
-  }, [isSubmitting]) 
+  }, [isPending]) 
 
   useEffect(() => {
-    if (isTransactionPending) {
+    if (isConfirming) {
       toast.info("Transaction is being processed...")
     }
-  }, [isTransactionPending])
+  }, [isConfirming])
 
   useEffect(() => {
-    if (isTransactionSuccess) {
+    if (isConfirmed) {
       toast.success("Event created successfully on blockchain!")
       router.push("/marketplace")
     }
-  }, [isTransactionSuccess, router])
+  }, [isConfirmed, router])
 
   useEffect(() => {
-    if (writeError) {
+    if (error) {
       toast.error("Transaction denied")
     }
-  }, [writeError])
+  }, [error])
 
-  useEffect(() => {
-    if (transactionError) {
-      toast.error(`Transaction failed: ${transactionError.message}`)
-    }
-  }, [transactionError])
-
-  const createTicket = () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
     if (!formData.title || !formData.description || !formData.date || !formData.time || !formData.location || !formData.price || !formData.totalSupply) {
       toast.error("Please fill in all required fields")
       return
     }
-
-    const price = parseFloat(formData.price)
-    const totalSupply = parseInt(formData.totalSupply)
-    
-    if (isNaN(price) || price <= 0) {
-      toast.error("Please enter a valid price greater than 0")
-      return
-    }
-    
-    if (isNaN(totalSupply) || totalSupply <= 0) {
-      toast.error("Please enter a valid total supply greater than 0")
-      return
-    }
-
-    // Check if event date is in the future
-    const eventDateTime = new Date(`${formData.date}T${formData.time}`)
-    if (eventDateTime <= new Date()) {
-      toast.error("Event date must be in the future")
-      return
-    }
-
-    writeContract({
-      address: eventTicketingAddress as `0x${string}`,
-      abi: eventTicketingAbi,
-      functionName: 'createTicket',
-      args: [
-        BigInt(Math.floor(price * 10**18)),
+  
+    try {
+      // Convert price to wei (assuming the price is in CELO, 1 CELO = 1e18 wei)
+      const priceInWei = BigInt(Math.floor(parseFloat(formData.price) * 1e18));
+      const totalSupply = BigInt(parseInt(formData.totalSupply, 10));
+      
+      // Validate price
+      if (priceInWei <= 0n) {
+        toast.error("Please enter a valid price greater than 0");
+        return;
+      }
+      
+      // Validate total supply
+      if (totalSupply <= 0n) {
+        toast.error("Please enter a valid total supply greater than 0");
+        return;
+      }
+  
+      // Check if event date is in the future
+      const eventDateTime = Math.floor(new Date(`${formData.date}T${formData.time}`).getTime() / 1000);
+      if (eventDateTime <= Math.floor(Date.now() / 1000)) {
+        toast.error("Event date must be in the future");
+        return;
+      }
+  
+      const metadata = {
+        bannerImage: formData.bannerImage ? formData.bannerImage.name : "",
+        date: formData.date,
+        time: formData.time
+      };
+  
+      await createTicket(
+        priceInWei,
         formData.title,
         formData.description,
-        BigInt(eventDateTime.getTime() / 1000),
-        BigInt(totalSupply),
-        JSON.stringify({
-          bannerImage: formData.bannerImage ? formData.bannerImage.name : "",
-          date: formData.date,
-          time: formData.time
-        }),
+        BigInt(eventDateTime),
+        totalSupply,
+        JSON.stringify(metadata),
         formData.location
-      ],
-    })
+      );
+  
+    } catch (error) {
+      console.error("Error creating event:", error);
+      toast.error("Failed to create event. Please try again.");
+    }
   }
 
   if (!isConnected) {
     router.push("/")
     return null
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    createTicket()
   }
 
   const totalRevenue = formData.price && formData.totalSupply
@@ -133,7 +127,7 @@ export default function CreateEvent() {
     : "0"
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900/10 to-slate-900">
+    <div className="min-h-screen bg-slate-900 text-foreground">
       <div className="pb-6 pt-4">
         <div className="container mx-auto max-w-6xl">
           {/* Header with back button */}
@@ -160,7 +154,7 @@ export default function CreateEvent() {
               {/* Left Column - Event Details */}
               <div className="xl:col-span-2 space-y-8">
                 {/* Basic Information */}
-                <Card className="bg-gradient-to-br from-slate-800/90 to-purple-900/20 border-purple-500/30 shadow-2xl">
+                <Card className="bg-slate-900/70 border-purple-500/30 shadow-2xl">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-white text-xl">
                       <FileText className="h-4 w-4 text-purple-400" />
@@ -203,7 +197,7 @@ export default function CreateEvent() {
                 </Card>
 
                 {/* Event Details */}
-                <Card className="bg-gradient-to-br from-slate-800/90 to-blue-900/20 border-blue-500/30 shadow-2xl">
+                <Card className="bg-slate-900/70 border-blue-500/30 shadow-2xl">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-white text-xl">
                       <Calendar className="h-4 w-4 text-blue-400" />
@@ -288,7 +282,7 @@ export default function CreateEvent() {
               {/* Right Column - Ticket Configuration & Summary */}
               <div className="space-y-8">
                 {/* Ticket Configuration */}
-                <Card className="bg-gradient-to-br from-slate-800/90 to-green-900/20 border-green-500/30 shadow-2xl">
+                <Card className="bg-slate-900/70 border-green-500/30 shadow-2xl">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-3 text-white text-xl">
                       <Coins className="h-4 w-4 text-green-400" />
@@ -340,7 +334,7 @@ export default function CreateEvent() {
                 </Card>
 
                 {/* Revenue Summary */}
-                <Card className="bg-gradient-to-br from-slate-800/90 to-yellow-900/20 border-yellow-500/30 shadow-2xl">
+                <Card className="bg-slate-900/70 border-yellow-500/30 shadow-2xl">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-3 text-white text-xl">
                       <DollarSign className="h-4 w-4 text-yellow-400" />
@@ -366,15 +360,15 @@ export default function CreateEvent() {
                 </Card>
 
                 {/* Create Button */}
-                <Card className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 border-purple-500/30 shadow-2xl">
+                <Card className="bg-slate-900/70 border-purple-500/30 shadow-2xl">
                   <CardContent className="p-4">
                     <Button
                       type="submit"
                       size="lg"
-                      disabled={isSubmitting || isTransactionPending}
+                      disabled={isPending || isConfirming}
                       className="text-sm px-4 rounded-md h-10 w-full bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-500 hover:via-pink-500 hover:to-blue-500 text-white font-bold shadow-lg transform hover:scale-[1.02] transition-all duration-200"
                     >
-                      {isSubmitting || isTransactionPending ? (
+                      {isPending || isConfirming ? (
                         <div className="flex items-center gap-3">
                           <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                           Creating Event...

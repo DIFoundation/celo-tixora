@@ -395,7 +395,7 @@ export default function EventDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900">
+    <div className="min-h-screen bg-slate-900">
       <div className="container mx-auto py-4">
         <Button
           onClick={() => router.back()}
@@ -643,17 +643,14 @@ export default function EventDetailPage() {
                 Event Details
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2">
+            <CardContent className="space-y-3">
               <div>
                 <p className="text-slate-400 text-xs mb-1">Event ID</p>
                 <p className="text-white font-mono text-xs">{events?.id}</p>
               </div>
               <div>
-                <p className="text-slate-400 text-xs mb-1">Contract Address</p>
-                <div className="flex items-center gap-2">
-                  <p className="text-white font-mono text-xs break-all flex-1">
-                    {eventTicketingAddress}
-                  </p>
+                <div className="flex items-center gap-2 justify-between">
+                  <p className="text-slate-400 text-xs mb-1">Contract Address</p>
                   <Button
                     variant="ghost"
                     size="sm"
@@ -667,14 +664,14 @@ export default function EventDetailPage() {
                     )}
                   </Button>
                 </div>
+                <p className="text-white font-mono text-xs break-all flex-1">
+                  {eventTicketingAddress}
+                </p>
               </div>
               {events?.creator && (
                 <div>
-                  <p className="text-slate-400 text-xs mb-1">Creator Address</p>
-                  <div className="flex items-center gap-2">
-                    <p className="text-white font-mono text-xs break-all flex-1">
-                      {events.creator}
-                    </p>
+                  <div className="flex items-center gap-2 justify-between">
+                    <p className="text-slate-400 text-xs mb-1">Creator Address</p>
                     <Button
                       variant="ghost"
                       size="sm"
@@ -688,6 +685,9 @@ export default function EventDetailPage() {
                       )}
                     </Button>
                   </div>
+                  <p className="text-white font-mono text-xs break-all flex-1">
+                    {events.creator}
+                  </p>
                 </div>
               )}
             </CardContent>
