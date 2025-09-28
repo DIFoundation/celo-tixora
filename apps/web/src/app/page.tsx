@@ -203,7 +203,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-hidden">
+    <div className="min-h-screen bg-slate-900 text-foreground overflow-hidden">
       {/* Hero Section */}
       <section className="py-8 relative overflow-hidden min-h-screen flex items-center">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 animate-gradient" />
@@ -218,7 +218,7 @@ export default function Home() {
         <div className="container mx-auto text-center relative z-10">
           <div className="max-w-5xl mx-auto">
             <div className={`transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white">
                 The Future of{' '}
                 <span className="gradient-text animate-neon-pulse bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent">
                   Event Ticketing
@@ -227,7 +227,7 @@ export default function Home() {
             </div>
 
             <div className={`transition-all duration-1000 delay-200 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-              <p className="text-base md:text-lg lg:text-xl text-muted-foreground mb-10 max-w-4xl mx-auto leading-relaxed">
+              <p className="text-base md:text-lg lg:text-xl text-muted-foreground mb-10 max-w-4xl mx-auto leading-relaxed text-gray-400">
                 Secure, transparent, and fraud-proof NFT tickets on the blockchain. Own your tickets, trade freely, and
                 never worry about counterfeits again.
               </p>
@@ -237,9 +237,9 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
                 {/* <WalletConnectButton className="w-full sm:w-auto min-w-[220px] text-lg px-8 py-4 animate-pulse-glow h-14 rounded-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 shadow-lg shadow-purple-500/25 transition-all duration-300" /> */}
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   size="sm"
-                  className="w-full sm:w-auto min-w-[220px] text-base py-3 glow-border hover:bg-primary/10 bg-transparent h-14 rounded-full border-2 hover:scale-105 transition-all duration-300"
+                  className="w-full sm:w-auto min-w-[220px] text-base py-3 glow-border hover:bg-primary/10 bg-transparent h-14 rounded-full border-2 hover:scale-105 transition-all duration-300 text-white"
                   onClick={() => scrollToSection("how-it-works")}
                 >
                   Learn More <ArrowRight className="ml-2 h-4 w-4" />
@@ -402,7 +402,7 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="py-10 bg-card/20">
+      <section id="how-it-works" className="py-10 bg-white/5">
         <div className="container mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-4xl md:text-5xl font-bold gradient-text bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent mb-4">
@@ -413,18 +413,15 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center group">
               <div className="relative">
-                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform animate-pulse-glow shadow-xl shadow-purple-500/30">
+                <div className="w-20 h-20 mb-3 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform animate-pulse-glow shadow-xl shadow-purple-500/30">
                   <Ticket className="h-10 w-10 text-white" />
                 </div>
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                  1
-                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-white">Buy NFT Tickets</h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <h3 className="text-xl font-semibold mb-2 text-white">Buy NFT Tickets</h3>
+              <p className="text-muted-foreground leading-5">
                 Connect your wallet and purchase authentic NFT tickets directly from event organizers. Each ticket is
                 unique and stored on the blockchain.
               </p>
@@ -432,15 +429,12 @@ export default function Home() {
 
             <div className="text-center group">
               <div className="relative">
-                <div className="w-20 h-20 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform animate-pulse-glow animate-delay-200 shadow-xl shadow-cyan-500/30">
+                <div className="w-20 h-20 mb-3 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform animate-pulse-glow animate-delay-200 shadow-xl shadow-cyan-500/30">
                   <Shield className="h-10 w-10 text-white" />
                 </div>
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                  2
-                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-white">Store Securely</h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <h3 className="text-xl font-semibold mb-2 text-white">Store Securely</h3>
+              <p className="text-muted-foreground leading-5">
                 Your tickets are safely stored in your crypto wallet. No more lost tickets or worrying about screenshots
                 - your ownership is cryptographically verified.
               </p>
@@ -448,15 +442,12 @@ export default function Home() {
 
             <div className="text-center group">
               <div className="relative">
-                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform animate-pulse-glow animate-delay-400 shadow-xl shadow-purple-500/30">
+                <div className="w-20 h-20 mb-3 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform animate-pulse-glow animate-delay-400 shadow-xl shadow-purple-500/30">
                   <Globe className="h-10 w-10 text-white" />
                 </div>
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                  3
-                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-white">Use & Trade</h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <h3 className="text-xl font-semibold mb-2 text-white">Use & Trade</h3>
+              <p className="text-muted-foreground leading-5">
                 Present your QR code at the event for instant verification. Transfer or resell your tickets anytime with
                 full transparency and zero fraud risk.
               </p>
@@ -478,7 +469,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Card className="text-center p-4 hover:scale-105 transition-all duration-300 border-purple-500/30 glow-border backdrop-blur-sm hover:shadow-xl hover:shadow-purple-500/20">
+            <Card className="bg-white/5 text-center p-4 hover:scale-105 transition-all duration-300 border-purple-500/30 ">
               <Shield className="h-16 w-16 text-purple-400 mx-auto mb-4 animate-pulse-glow" />
               <h3 className="text-xl font-semibold mb-2 text-white">100% Secure</h3>
               <p className="text-sm text-purple-200 leading-relaxed">
@@ -486,7 +477,7 @@ export default function Home() {
               </p>
             </Card>
 
-            <Card className="text-center p-4 hover:scale-105 transition-all duration-300 border-cyan-500/30 glow-border backdrop-blur-sm hover:shadow-xl hover:shadow-cyan-500/20">
+            <Card className="bg-white/5 text-center p-4 hover:scale-105 transition-all duration-300 border-cyan-500/30">
               <Zap className="h-16 w-16 text-cyan-400 mx-auto mb-4 animate-pulse-glow animate-delay-200" />
               <h3 className="text-xl font-semibold mb-2 text-white">Zero Fees</h3>
               <p className="text-sm text-cyan-200 leading-relaxed">
@@ -494,7 +485,7 @@ export default function Home() {
               </p>
             </Card>
 
-            <Card className="text-center p-4 hover:scale-105 transition-all duration-300 border-purple-500/30 glow-border backdrop-blur-sm hover:shadow-xl hover:shadow-purple-500/20">
+            <Card className="bg-white/5 text-center p-4 hover:scale-105 transition-all duration-300 border-purple-500/30">
               <RefreshCw className="h-16 w-16 text-purple-400 mx-auto mb-4 animate-pulse-glow animate-delay-400" />
               <h3 className="text-xl font-semibold mb-2 text-white">Free Trading</h3>
               <p className="text-sm text-purple-200 leading-relaxed">
@@ -502,7 +493,7 @@ export default function Home() {
               </p>
             </Card>
 
-            <Card className="text-center p-8 hover:scale-105 transition-all duration-300 border-cyan-500/30 glow-border backdrop-blur-sm hover:shadow-xl hover:shadow-cyan-500/20">
+            <Card className="bg-white/5 text-center p-8 hover:scale-105 transition-all duration-300 border-cyan-500/30">
               <Star className="h-16 w-16 text-cyan-400 mx-auto mb-4 animate-pulse-glow animate-delay-600" />
               <h3 className="text-xl font-semibold mb-2 text-white">Own Forever</h3>
               <p className="text-sm text-cyan-200 leading-relaxed">
@@ -514,7 +505,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-6 border-t border-border bg-card/20">
+      <footer className="bg-white/5 py-6 border-t border-border">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between text-center mb-2">
             <div>
