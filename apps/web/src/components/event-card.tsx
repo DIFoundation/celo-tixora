@@ -88,7 +88,7 @@ export function EventCard({ event }: EventCardProps) {
 
     try {
       // Check if user has enough balance
-      const balance = await window.ethereum.request({
+      const balance = await (window as any).ethereum.request({
         method: 'eth_getBalance',
         params: [address, 'latest']
       } as any);

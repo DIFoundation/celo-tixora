@@ -17,8 +17,8 @@ import {
 import { Label } from "@/components/ui/label"
 import { useAccount } from 'wagmi'
 import { useEventTicketingGetters, useEventTicketingSetters } from "@/hooks/useEventTicketing"
+import { useTicketNFTGetters } from "@/hooks/useNFTTicket"
 import Link from "next/link"
-import Image from "next/image"
 import { formatEther } from 'viem'
 
 interface NFTTicketDisplay {
@@ -43,53 +43,53 @@ export function TicketManagementSystem() {
   const [currentAction, setCurrentAction] = useState<TicketAction>(null)
   const [transferAddress, setTransferAddress] = useState("")
   const { isConnected, address } = useAccount()
-  const { useGetRecentTickets, useIsRegistered } = useEventTicketingGetters()
+  const { useGetRecentTickets } = useEventTicketingGetters()
   const { isConfirmed } = useEventTicketingSetters()
+  const { useBalanceOf, useGetTicketMetadata } = useTicketNFTGetters()
 
-  // Fetch all recent tickets
-  const { data: allTickets } = useGetRecentTickets()
-  console.log("all tickets: ", allTickets)
+  // Get the number of tickets owned by the user
+  const { data: balance = 0n } = useBalanceOf(address)
+  
+  // Generate an array of token IDs to fetch metadata for
+  const tokenIds = useMemo(() => {
+    if (!balance) return []
+    return Array(Number(balance)).fill(0).map((_, i) => BigInt(i + 1))
+  }, [balance])
 
-  // Get array of ticket IDs for registration check
-  const ticketIds = useMemo(() => 
-    allTickets?.map(ticket => BigInt(ticket.id)) || [], 
-    [allTickets]
-  )
+  // Get metadata for each token ID
+  const { data: ticketsData = [] } = useGetTicketMetadata(tokenIds)
 
-  // Check registration status for each ticket
-  const registrationChecks = useIsRegistered(ticketIds, address)
-  console.log("registration checks: ", registrationChecks)
-
-  // Filter tickets to only include those registered by the user
+  // Transform the tickets data into the expected format
   const userTickets = useMemo(() => {
-    if (!allTickets || !registrationChecks.data) return []
-
-    return allTickets
-      .filter((ticket, index) => registrationChecks.data?.[index]?.result === true)
-      .map((ticket) => {
+    if (!ticketsData || !Array.isArray(ticketsData)) return []
+    
+    return ticketsData
+      .filter(ticket => ticket && ticket.registered) // Filter out invalid tickets
+      .map((ticket, index) => {
         const now = Math.floor(Date.now() / 1000)
         const isPast = Number(ticket.eventTimestamp) < now
-
+        
         return {
-          id: ticket.id.toString(),
-          tokenId: BigInt(ticket.id),
-          eventTitle: ticket.eventName,
-          eventTimestamp: Number(ticket.eventTimestamp),
-          location: ticket.location,
+          id: ticket.tokenId.toString(),
+          tokenId: BigInt(ticket.tokenId),
+          eventTitle: ticket.eventName || `Event #${ticket.tokenId}`,
+          eventTimestamp: Number(ticket.eventTimestamp) || 0,
+          location: ticket.location || 'Location not specified',
           status: isPast ? "past" as const : "upcoming" as const,
-          qrCode: ticket.id.toString(),
-          price: formatEther(ticket.price) + " CELO",
-          purchaseDate: new Date(Number(ticket.eventTimestamp) * 1000).toISOString(),
-          txHash: "0x" + ticket.id.toString(16).padStart(64, '0')
+          qrCode: ticket.tokenId.toString(),
+          price: ticket.price ? `${formatEther(ticket.price)} CELO` : '0 CELO',
+          purchaseDate: ticket.purchaseDate || new Date().toISOString(),
+          txHash: ticket.txHash || `0x${ticket.tokenId.toString().padStart(64, '0')}`
         } satisfies NFTTicketDisplay
       })
-  }, [allTickets, registrationChecks.data])
+  }, [ticketsData])
 
   // Handle transfer completion
   useEffect(() => {
     if (isConfirmed) {
       setCurrentAction(null)
       setTransferAddress("")
+      // Optionally refresh the tickets list here
     }
   }, [isConfirmed])
 
