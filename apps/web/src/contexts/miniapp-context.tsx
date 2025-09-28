@@ -10,6 +10,7 @@ import {
   useEffect,
   useState,
   type ReactNode,
+  type JSX,
 } from "react";
 import FrameWalletProvider from "./frame-wallet-context";
 

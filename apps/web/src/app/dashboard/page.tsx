@@ -215,7 +215,7 @@ export default function Dashboard() {
                 </Card>
                 <Card className="bg-gradient-to-br from-[#A855F7] to-[#244376] border-[#1E293B]">
                   <CardContent className="p-4 text-center">
-                    <p className="text-2xl font-bold text-white">{platformStats.totalPlatformRevenue}</p>
+                    <p className="text-2xl font-bold text-white">{Number(platformStats.totalPlatformRevenue).toFixed(2)}</p>
                     <p className="text-slate-300 text-sm">Platform Revenue (CELO)</p>
                   </CardContent>
                 </Card>
